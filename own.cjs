@@ -15,7 +15,7 @@ class OwnEventEmitter {
 
   once(eventName, fn) {
     this.listeners[eventName] = this.listeners[eventName] || []
-    
+
     const onceWrapper = () => {
       fn()
       this.off(eventName, onceWrapper)
@@ -31,13 +31,13 @@ class OwnEventEmitter {
 
   removeListener(eventName, fn) {
     let lis = this.listeners[eventName]
-    
+
     if (!lis) return this
-    
+
     for (let i = lis.length; i > 0; i--) {
       if (lis[i] === fn) {
         lis.splice(i, 1)
-    
+
         break
       }
     }
@@ -46,9 +46,9 @@ class OwnEventEmitter {
 
   emit(eventName, ...args) {
     let fns = this.listeners[eventName]
-    
+
     if (!fns) return false
-    
+
     fns.forEach(f => {
       f(...args)
     })
@@ -58,7 +58,7 @@ class OwnEventEmitter {
 
   listenerCount(eventName) {
     let fns = this.listeners[eventName] || []
-    
+
     return fns.length
   }
 
